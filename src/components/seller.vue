@@ -123,7 +123,7 @@ export default {
     this.allData=res
 
     this.allData.sort((a, b) => {
-        return a.value - b.value // 从小到大的排序
+        return b.value - a.value // 从小到大的排序
       })
       // 每5个元素显示一页
       this.totalPage = this.allData.length % 5 === 0 ? this.allData.length / 5 : this.allData.length / 5 + 1
@@ -135,7 +135,7 @@ export default {
     updateChart () {
         const start = (this.currentPage - 1) * 5
       const end = this.currentPage * 5
-
+    console.log(this.allData,start, end)
       const showData = this.allData.slice(start, end)
       console.log(showData)
       const sellerNames = showData.map((item) => {
@@ -144,6 +144,7 @@ export default {
       const sellerValues = showData.map((item) => {
         return item.value
       })
+    //   console.log(sellerValues)
       const dataOption = {
         yAxis: {
           data: sellerNames
