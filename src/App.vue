@@ -1,32 +1,40 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
+  <div id="app" style="background-color: rgb(22, 21, 34); color: rgb(255, 255, 255);">
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+
+/* 定义媒体查询 */
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 42.66px !important;
+  }
+}
+@media screen and (min-width: 1920px) {
+  html {
+    font-size: 80px !important;
+  }
+}
+html,
+body {
+ /* height: 100%; */
+  color: #fff;
+  background-size: cover;
 }
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+#app {
+  // min-height: 780px;
+  // min-width: 1024px;
+  // max-width: 1920px;
+  // margin: 0 auto;
+  padding: 0 20px;
+  height: 100vh;
+}
+.com-container, .com-page,.com-chart, body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 </style>
