@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     async initChart() {
-      this.chartInstance = this.$echarts.init(this.$refs.map_ref);
+      this.chartInstance = this.$echarts.init(this.$refs.map_ref,'chalk');
       const res = await axios.get(
         "http://localhost:8080/static/map/china.json"
       );

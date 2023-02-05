@@ -76,7 +76,6 @@ export default {
         const seriesArr =showData.map((item,index)=>{
             return {
                 type:'pie',
-                radius:[110,100],
                 hoverAnimation: false,
                 center:centeArr[index],
                 labelLine:{

@@ -40,4 +40,7 @@ body {
     height: 100%;
     overflow: hidden;
 }
+.com-container{
+  position: relative;
+}
 </style>
