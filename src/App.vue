@@ -5,7 +5,10 @@
 </template>
 
 <style lang="scss">
-
+*{
+  margin: 0;
+  padding: 0;
+}
 /* 定义媒体查询 */
 @media screen and (max-width: 1024px) {
   html {
