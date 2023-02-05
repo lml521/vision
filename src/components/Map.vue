@@ -119,7 +119,9 @@ export default {
         legend: {
           data: legendArr,
         },
-        series: seriesArr,
+
+        series:seriesArr,
+
       };
       this.chartInstance.setOption(dataOption);
     },

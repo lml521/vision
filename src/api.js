@@ -36,3 +36,10 @@ export const getRank=()=> {
 }
 
 
+// 获取饼图数据
+export const getHotproduct=()=> {
+    return request({
+        url:'/data-view/hotproduct',
+        method: "GET",
+    })
+}
