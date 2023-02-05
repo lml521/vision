@@ -4,31 +4,10 @@
 </div>
 </template>
 <script>
-import  seller from '../components/seller.vue'
+import seller from "../components/seller.vue";
 export default {
-    
-components: {seller},
-data() {
-return {
+  components: { seller },
 };
-},
-computed: {},
-watch: {},
-methods: {
-},
-created() {
-},
-mounted() {
-},
-beforeCreate() {},
-beforeMount() {},
-beforeUpdate() {}, 
-updated() {},
-beforeDestroy() {}, 
-destroyed() {},
-activated() {},
-}
 </script>
 <style scoped>
 </style>
-}

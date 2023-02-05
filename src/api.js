@@ -43,3 +43,12 @@ export const getHotproduct=()=> {
         method: "GET",
     })
 }
+
+// 获取 库存 数据
+
+export const getStock=()=> {
+    return request({
+        url:'/data-view/stock',
+        method: "GET",
+    })
+}

@@ -5,17 +5,10 @@ import TrendPage from '../views/TrendPage.vue'
 import MapPage from '../views/MapPage.vue'
 import RankPage from '../views/RankPage.vue'
 import HotPage from '../views/HotPage.vue'
+import StockPage from '../views/StockPage.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/',
-  //   redirect: '/screen'
-  // },
-  // {
-  //   path: '/screen',
-  //   component: ScreenPage
-  // },
   {
     path: '/trendpage',
     component: TrendPage
@@ -28,6 +21,9 @@ const routes = [
   },{
     path: '/hotpage',
     component: HotPage
+  },{
+    path: '/stockpage',
+    component: StockPage
   }
 ]
 
