@@ -27,5 +27,12 @@ export const getMapList=()=> {
     })
 }
 
+// 获取 地区销售排行
+export const getRank=()=> {
+    return request({
+        url:'data-view/rank',
+        method: "GET",
+    })
+}
 
 
