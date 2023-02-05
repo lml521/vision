@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ScreenPage from '../views/sellerpage.vue'
 import TrendPage from '../views/TrendPage.vue'
+import MapPage from '../views/MapPage.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -15,6 +16,9 @@ const routes = [
   },{
     path: '/trendpage',
     component: TrendPage
+  },{
+    path: '/mappage',
+    component: MapPage
   }
 ]
 

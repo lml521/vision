@@ -19,5 +19,13 @@ export const getSeller=()=> {
     })
 }
 
+// 获取 地图数据 
+export const getMapList=()=> {
+    return request({
+        url:'data-view/map',
+        method: "GET",
+    })
+}
+
 
 

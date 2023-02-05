@@ -44,6 +44,16 @@ export default {
       this.chartInstance = this.$echarts.init(this.$refs.seller_ref, this.theme)
       // 对图表初始化配置的控制
       const initOption = {
+        normal: {
+      color:function(params){  //根据不同数据显示不同颜色的标记
+      console.log("------",params)
+          // if (params.data.name=="京科热电") {
+          //     return '#fff';
+          // } else{
+          //     return '#00ff00';
+          // }
+      }
+      },
         title: {
           text: '▎商家销售统计',
           textStyle:{
@@ -61,7 +71,10 @@ export default {
           containLabel: true // 距离是包含坐标轴上的文字
         },
         xAxis: {
-          type: 'value'
+          type: 'value',
+          splitLine:{
+            show:false
+           }
         },
         yAxis: {
           type: 'category'

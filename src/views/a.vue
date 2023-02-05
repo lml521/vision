@@ -23,6 +23,8 @@
       methods: {
         initChart() {
           this.chartInstance = this.$echarts.init(this.$refs.trend_ref);
+          const initOption={}
+          this.chartInstance.setOption(initOption)
         },
     
         async getData() {
