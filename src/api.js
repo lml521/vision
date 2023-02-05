@@ -18,3 +18,6 @@ export const getSeller=()=> {
         method: "GET",
     })
 }
+
+
+

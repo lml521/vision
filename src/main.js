@@ -3,11 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import * as echarts from 'echarts';
-
-// 全局echarts
-Vue.prototype.$echarts=echarts
-
+// 别的组件中 this.$echarts
+Vue.prototype.$echarts = window.echarts
 
 Vue.config.productionTip = false
 
