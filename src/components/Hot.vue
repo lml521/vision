@@ -1,10 +1,8 @@
 <template>
     <div class="com-container" :style="comStyle">
         <div class="com-chart" ref="hot_ref"></div>
-
         <span class="iconfont arr-left" :style="comStyle" @click="toLeft">&#xe6ef;</span>
         <span class="iconfont arr-right" :style="comStyle" @click="toRight">&#xe6ed;</span>
-
         <span class="cat-name">{{catName}}</span>
     </div>
 </template>

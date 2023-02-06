@@ -40,7 +40,7 @@
           <Map ref="map"></Map>
           <div class="resize">
             <!-- icon-compress-alt -->
-            <span @click="changeSize('map')"  
+            <span @click="changeSize('map')"
             :class="['iconfont', fullScreenStatus.map ? 'icon-compress-alt' : 'icon-expand-alt']"></span>
           </div>
         </div>
