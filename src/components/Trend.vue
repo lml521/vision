@@ -2,13 +2,13 @@
 <div class="com-container">
     <div class="title" :style="comStyle">
       <div @click="showChoice=!showChoice" >
-         <span>{{'▎'+showTitle}}</span>
+         <span >{{'▎'+showTitle}}</span>
       <span class="iconfont titlt-icon" :style="comStyle">&#xe6eb;</span>
       </div>
      
     <div class="select-con" v-show="showChoice" :style="marginStyle">
       <div class="select-item" v-for="item in selectTypes" :key="item.key" 
-      @click="handleSelect(item.key)">
+      @click="handleSelect(item.key)" :style="comStyle">
         {{item.text}}
       </div>
     </div>
@@ -19,19 +19,30 @@
 </template>
 <script>
 import { getTrend } from "../api.js";
+import {mapState} from 'vuex'
+import { getThemeValue } from "../utils/theme_utils.js";
 export default {
   components: {},
   data() {
     return {
-      chartInstane: null,
+      chartInstance: null,
       allData: null, // 从服务器中获取的所有数据
       showChoice: false, // 是否显示可选项
       choiceType: "map", // 显示的数据类型
       titleFontSize: 0, // 指明标题的字体大小
     };
   },
-  computed: {
 
+  watch:{
+    theme(){
+      this.chartInstance.dispose()
+      this.initChart()
+      this.screenAdapter()
+      this.updateChart()
+    }
+  },
+  computed: {
+    ...mapState(['theme']),
     selectTypes() {
       if (!this.allData) {
         return [];
@@ -52,9 +63,11 @@ export default {
 
     // 设置标题样式 
     comStyle(){
+      let titleColor = getThemeValue(this.theme).titleColor;
       return {
-        fontSize:this.titleFontSize+'px'
-      }
+        fontSize: this.titleFontSize + "px",
+        color: titleColor,
+      };
     },
 
     marginStyle(){
@@ -80,7 +93,7 @@ export default {
     },
     // 初始化
     initChart() {
-      this.chartInstane = this.$echarts.init(this.$refs.trend_ref, "chalk");
+      this.chartInstance = this.$echarts.init(this.$refs.trend_ref,this.theme);
       const initOption = {
         grid: {
           left: "3%",
@@ -105,7 +118,7 @@ export default {
           type: "value",
         },
       };
-      this.chartInstane.setOption(initOption);
+      this.chartInstance.setOption(initOption);
     },
 
     async getData() {
@@ -170,29 +183,7 @@ export default {
         series: seriesArr,
       };
 
-      // const timeArr =this.allData.common
-      // const valueArr =this.allData.map.data
-      // const seriesArr =valueArr.map(item=>{
-      //     return {
-      //       name:item.name,
-      //         type:"line",
-      //         data:item.data,
-      //         stack:'map'
-      //     }
-      // })
-      // const legendArr =valueArr.map(item=>{
-      //   return item.name
-      // })
-      // const dataOption ={
-      //     xAris:{
-      //         data:timeArr
-      //     },
-      //     legend:{
-      //       data:legendArr
-      //     },
-      //     series:seriesArr,
-      // }
-      this.chartInstane.setOption(dataOption);
+      this.chartInstance.setOption(dataOption);
     },
 
     screenAdapter() {
@@ -207,8 +198,8 @@ export default {
           }
         }
       }
-      this.chartInstane.setOption(adapterOption);
-      this.chartInstane.resize();
+      this.chartInstance.setOption(adapterOption);
+      this.chartInstance.resize();
     },
   },
 };
@@ -227,7 +218,5 @@ export default {
   font-size: 50px;
   cursor: pointer;
 }
-.select-con {
-    background-color: #222733;
-  }
+
 </style>

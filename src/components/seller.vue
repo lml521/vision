@@ -17,18 +17,22 @@ export default {
       timerId: null // 定时器的标识
     }
   },
-//   created () {
-//     this.$socket.registerCallBack('sellerData', this.getData)
-//   },
+  computed: {
+    ...mapState(['theme']),
+
+  },
+  watch:{
+    theme(){
+      this.chartInstance.dispose()
+      this.initChart()
+      this.screenAdapter()
+      this.updateChart()
+    }
+  },
   mounted () {
     this.initChart()
     this.getData()
-    // this.$socket.send({
-    //   action: 'getData',
-    //   socketType: 'sellerData',
-    //   chartName: 'seller',
-    //   value: ''
-    // })
+    
     window.addEventListener('resize', this.screenAdapter)
     // 在页面加载完成的时候, 主动进行屏幕的适配
     this.screenAdapter()
@@ -41,16 +45,13 @@ export default {
   },
   methods:{
     initChart () {
-      this.chartInstance = this.$echarts.init(this.$refs.seller_ref,'chalk')
+      this.chartInstance = this.$echarts.init(this.$refs.seller_ref,this.theme)
       // 对图表初始化配置的控制
       const initOption = {
      
         title: {
           text: '▎商家销售统计',
-          textStyle:{
-            fontSize:50,
-            color:"#fff",
-          },
+         
           left: 20,
           top: 20
         },

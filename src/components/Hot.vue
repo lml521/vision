@@ -3,11 +3,13 @@
         <div class="com-chart" ref="hot_ref"></div>
         <span class="iconfont arr-left" :style="comStyle" @click="toLeft">&#xe6ef;</span>
         <span class="iconfont arr-right" :style="comStyle" @click="toRight">&#xe6ed;</span>
-        <span class="cat-name">{{catName}}</span>
+        <span class="cat-name" :style="comStyle">{{catName}}</span>
     </div>
 </template>
 <script>
 import { getHotproduct } from "@/api.js";
+import { mapState } from "vuex";
+import { getThemeValue } from "../utils/theme_utils.js";
 export default {
   data() {
     return {
@@ -18,6 +20,8 @@ export default {
     };
   },
   computed: {
+    ...mapState(["theme"]),
+
     catName() {
       if (!this.allData) {
         return "";
@@ -27,9 +31,19 @@ export default {
     },
 
     comStyle() {
+      let titleColor = getThemeValue(this.theme).titleColor;
       return {
         fontSize: this.titleFontSize + "px",
+        color: titleColor,
       };
+    },
+  },
+  watch: {
+    theme() {
+      this.chartInstance.dispose();
+      this.initChart();
+      this.screenAdapter();
+      this.updateChart();
     },
   },
   mounted() {
@@ -44,7 +58,7 @@ export default {
   },
   methods: {
     initChart() {
-      this.chartInstance = this.$echarts.init(this.$refs.hot_ref, "chalk");
+      this.chartInstance = this.$echarts.init(this.$refs.hot_ref, this.theme);
       const initOption = {
         title: {
           text: "▎热销商品的占比",
@@ -52,9 +66,8 @@ export default {
           top: 20,
         },
         legend: {
-          top: "10%",
+          top: "15%",
           icon: "circle",
-          // fontSize:10,
         },
         tooltip: {
           show: true,
@@ -67,8 +80,9 @@ export default {
             let retStr = "";
             thirdCategory.forEach((item) => {
               retStr += `
-                        ${item.name}:${parseInt((item.value / total) * 100) +"%"}
-                        <br />`
+                        ${item.name}:${parseInt((item.value / total) * 100) +
+                "%"}
+                        <br />`;
             });
             return retStr;
           },
@@ -131,7 +145,7 @@ export default {
       const adapterOption = {
         title: {
           textStyle: {
-            fontSize: this.titleFontSize / 2,
+            fontSize: this.titleFontSize,
           },
         },
         legend: {

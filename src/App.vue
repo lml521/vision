@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="background-color: rgb(22, 21, 34); color: rgb(255, 255, 255);">
+  <div id="app" >
     <router-view/>
   </div>
 </template>
@@ -21,26 +21,22 @@
   }
 }
 html,
-body {
- /* height: 100%; */
+body { 
   color: #fff;
   background-size: cover;
-}
-
-#app {
-  // min-height: 780px;
-  // min-width: 1024px;
-  // max-width: 1920px;
-  // margin: 0 auto;
-  padding: 0 20px;
-  height: 100vh;
 }
 .com-container, .com-page,.com-chart, body, html {
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
+
 .com-container{
   position: relative;
+  border-radius: 5%!important;
+}
+#app {
+  padding: 0 20px;
+  height: 100vh;
 }
 </style>

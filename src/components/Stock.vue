@@ -5,6 +5,7 @@
 </template>
 <script>
 import {getStock} from '@/api.js'
+import {mapState} from 'vuex'
 export default {
     data() {
     return {
@@ -13,6 +14,19 @@ export default {
       currentIndex: 0, // 当前显示的数据
       timerId: null // 定时器的标识
     };
+  },
+  
+  computed: {
+    ...mapState(['theme']),
+
+  },
+  watch:{
+    theme(){
+      this.chartInstance.dispose()
+      this.initChart()
+      this.screenAdapter()
+      this.updateChart()
+    }
   },
   mounted() {
     this.initChart();
@@ -27,7 +41,7 @@ export default {
   },
   methods: {
     initChart() {
-      this.chartInstance = this.$echarts.init(this.$refs.stock_ref,'chalk');
+      this.chartInstance = this.$echarts.init(this.$refs.stock_ref,this.theme);
       const initOption = {
         title:{
             text:'▎库存和销量分析',

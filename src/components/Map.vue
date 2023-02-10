@@ -6,6 +6,7 @@
 </template>
 <script>
 import axios from "axios";
+import {mapState} from 'vuex'
 import { getMapList } from "../api.js";
 import { getProvinceMapInfo } from "@/utils/map_utils"; // 省份地图
 export default {
@@ -15,6 +16,18 @@ export default {
       allData: null,
       mapData: [],
     };
+  },
+  computed: {
+    ...mapState(['theme']),
+
+  },
+  watch:{
+    theme(){
+      this.chartInstance.dispose()
+      this.initChart()
+      this.screenAdapter()
+      this.updateChart()
+    }
   },
   mounted() {
     this.initChart();
@@ -29,7 +42,7 @@ export default {
   },
   methods: {
     async initChart() {
-      this.chartInstance = this.$echarts.init(this.$refs.map_ref,'chalk');
+      this.chartInstance = this.$echarts.init(this.$refs.map_ref,this.theme);
       const res = await axios.get(
         "http://localhost:8080/static/map/china.json"
       );

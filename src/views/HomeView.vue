@@ -1,16 +1,18 @@
 <template>
-  <div class="home" >
+  <div class="home" :style="containerStyle">
 
     <!-- 头部数据  -->
    <div class="header" >
     <div>
-      <img src="../assets/header_border.png" style="width:100%"></img>
+      <img :src="headerSrc" style="width:100%"></img>
     </div>
-    <span class="logo">bookbook</span>
+    <span class="logo">
+      <img :src="logoSrc">
+    </span>
     <span class="title">电商平台实时监控系统</span>
     <span class="title-right">
-      <img src="../assets/下载.png" alt="" class="qiehuan">
-      <img src="../assets/下载 (1).png" alt="" class="qiehuan" style="display: none"></img>
+      <img :src="themeSrc" alt="" class="qiehuan"
+      @click="handleChangeTheme">
      <span class="datetime"> {{ date }}</span>
     </span>
    </div>
@@ -78,18 +80,16 @@
 </template>
 
 <script>
-import { getTrend } from "../api.js";
 const dayjs = require("dayjs");
+import { getThemeValue } from "../utils/theme_utils.js";
 
-
-
-import Hot from '@/components/Hot.vue'
-import Map from '@/components/Map.vue'
-import Rank from '@/components/Rank.vue'
-import Seller from '@/components/seller.vue'
-import Stock from '@/components/Stock.vue'
-import Trend from '@/components/Trend.vue'
-
+import Hot from "@/components/Hot.vue";
+import Map from "@/components/Map.vue";
+import Rank from "@/components/Rank.vue";
+import Seller from "@/components/seller.vue";
+import Stock from "@/components/Stock.vue";
+import Trend from "@/components/Trend.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -98,21 +98,43 @@ export default {
     Rank,
     Seller,
     Stock,
-    Trend
+    Trend,
   },
   data() {
     return {
       date: null,
-        // 定义每一个图表的全屏状态
-        fullScreenStatus: {
+      list: 123,
+      // 定义每一个图表的全屏状态
+      fullScreenStatus: {
         trend: false,
         seller: false,
         map: false,
         rank: false,
         hot: false,
-        stock: false
-      }
+        stock: false,
+      },
     };
+  },
+  computed: {
+    ...mapState(["theme"]),
+    logoSrc() {
+      return "/static/img/" + getThemeValue(this.theme).logoSrc;
+    },
+    headerSrc() {
+      return "/static/img/" + getThemeValue(this.theme).headerBorderSrc;
+    },
+    themeSrc() {
+      return "/static/img/" + getThemeValue(this.theme).themeSrc;
+    },
+    containerStyle() {
+      let backgrounds = getThemeValue(this.theme).backgroundColor;
+      let titles = getThemeValue(this.theme).titleColor;
+      console.log(backgrounds, titles);
+      return {
+        backgroundColor: backgrounds,
+        color: titles,
+      };
+    },
   },
   created() {
     this.initTime();
@@ -126,13 +148,16 @@ export default {
       }, 1000);
     },
 
-    changeSize(chartName){
-      this.fullScreenStatus[chartName]=!this.fullScreenStatus[chartName]
+    changeSize(chartName) {
+      this.fullScreenStatus[chartName] = !this.fullScreenStatus[chartName];
 
-      this.$nextTick(()=>{
-        this.$refs[chartName].screenAdapter()
-      })
-    }
+      this.$nextTick(() => {
+        this.$refs[chartName].screenAdapter();
+      });
+    },
+    handleChangeTheme() {
+      this.$store.commit("changeTheme");
+    },
   },
 };
 </script>
