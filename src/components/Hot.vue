@@ -21,7 +21,6 @@ export default {
   },
   computed: {
     ...mapState(["theme"]),
-
     catName() {
       if (!this.allData) {
         return "";
@@ -54,7 +53,6 @@ export default {
   },
   destroyed() {
     window.removeEventListener("resize", this.screenAdapter);
-    // this.$socket.unRegisterCallBack('sellerData')
   },
   methods: {
     initChart() {
