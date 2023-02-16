@@ -5,7 +5,6 @@ const theme={
         logoSrc:'logo_dark.png',
         themeSrc:'qiehuan_dark.png',
         headerBorderSrc:'header_border_dark.png'
-
     },
     vintage:{
         backgroundColor:'#eeeeee',
@@ -13,7 +12,6 @@ const theme={
         logoSrc:'logo_light2.png',
         themeSrc:'qiehuan_light.png',
         headerBorderSrc:'header_border_light.png'
-
     }
 }
 export const getThemeValue=(themeName)=> {
