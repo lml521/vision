@@ -9,5 +9,3 @@ export default {
   components: {Stock},
 };
 </script>
-<style scoped>
-</style>
